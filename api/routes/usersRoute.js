@@ -1,9 +1,10 @@
 const { Router } = require('express');
+const UserController = require('../controllers/userController');
 
 const router = Router();
 
 router
-  .post('/users')
+  .post('/users', UserController.createUser)
   .get('/users')
   .get('/users/id/:id')
   .put('/users/id/:id')
