@@ -1,7 +1,10 @@
 const { Router } = require('express');
 const UserController = require('../controllers/userController');
+const authenticate = require('../middleware/authenticate');
 
 const router = Router();
+
+router.use(authenticate);
 
 router
   .post('/users', UserController.createUser)
