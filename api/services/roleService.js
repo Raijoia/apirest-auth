@@ -27,6 +27,14 @@ class RoleService {
       throw new Error('Error getting roles');
     }
   }
+
+  async getRole(id) {
+    try {
+      return await database.roles.findOne({ where: { id } });
+    } catch (error) {
+      throw new Error('Error getting role');
+    }
+  }
 }
 
 module.exports = RoleService;

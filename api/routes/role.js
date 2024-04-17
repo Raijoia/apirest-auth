@@ -6,7 +6,7 @@ const router = Router();
 router
   .post('/role', RoleController.createRole)
   .get('/role', RoleController.getRoles)
-  .get('/role/:id')
+  .get('/role/:id', RoleController.getRole)
   .put('/role/:id')
   .delete('/role/:id');
 
