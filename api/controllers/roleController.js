@@ -12,6 +12,15 @@ class RoleController {
       res.status(400).send({ message: error.message });
     }
   }
+
+  static async getRoles(req, res) {
+    try {
+      const roles = await roleService.getRoles();
+      res.status(200).send(roles);
+    } catch (error) {
+      res.status(400).send({ message: error.message });
+    }
+  }
 }
 
 module.exports = RoleController;

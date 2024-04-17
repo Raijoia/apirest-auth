@@ -5,7 +5,7 @@ const router = Router();
 
 router
   .post('/role', RoleController.createRole)
-  .get('/role')
+  .get('/role', RoleController.getRoles)
   .get('/role/:id')
   .put('/role/:id')
   .delete('/role/:id');

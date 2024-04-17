@@ -19,6 +19,14 @@ class RoleService {
       throw new Error('Error creating role');
     }
   }
+
+  async getRoles() {
+    try {
+      return await database.roles.findAll();
+    } catch (error) {
+      throw new Error('Error getting roles');
+    }
+  }
 }
 
 module.exports = RoleService;
