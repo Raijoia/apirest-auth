@@ -54,6 +54,22 @@ class RoleService {
       throw new Error('Error updating role');
     }
   }
+
+  async deleteRole(id) {
+    try {
+      const role = await database.roles.findOne({ where: { id } });
+
+      if (!role) {
+        throw new Error('Role not found');
+      }
+
+      await role.destroy();
+
+      return true;
+    } catch (error) {
+      throw new Error('Error deleting role');
+    }
+  }
 }
 
 module.exports = RoleService;

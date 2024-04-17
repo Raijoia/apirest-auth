@@ -42,6 +42,16 @@ class RoleController {
       res.status(400).send({ message: error.message });
     }
   }
+
+  static async deleteRole(req, res) {
+    try {
+      const { id } = req.params;
+      await roleService.deleteRole(id);
+      res.status(200).send({ message: 'Role deleted' });
+    } catch (error) {
+      res.status(400).send({ message: error.message });
+    }
+  }
 }
 
 module.exports = RoleController;
