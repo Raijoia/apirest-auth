@@ -35,6 +35,25 @@ class RoleService {
       throw new Error('Error getting role');
     }
   }
+
+  async updateRole(dto) {
+    try {
+      const role = await database.roles.findOne({ where: { id: dto.id } });
+
+      if (!role) {
+        throw new Error('Role not found');
+      }
+
+      role.nome = dto.nome;
+      role.descricao = dto.descricao;
+
+      await role.save();
+
+      return role;
+    } catch (error) {
+      throw new Error('Error updating role');
+    }
+  }
 }
 
 module.exports = RoleService;

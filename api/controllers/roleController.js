@@ -31,6 +31,17 @@ class RoleController {
       res.status(400).send({ message: error.message });
     }
   }
+
+  static async updateRole(req, res) {
+    try {
+      const { id } = req.params;
+      const { nome, descricao } = req.body;
+      const role = await roleService.updateRole({ id, nome, descricao });
+      res.status(200).send(role);
+    } catch (error) {
+      res.status(400).send({ message: error.message });
+    }
+  }
 }
 
 module.exports = RoleController;
