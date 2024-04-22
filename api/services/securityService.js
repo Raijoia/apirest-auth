@@ -76,6 +76,46 @@ class SecurityService {
 
     return newUser;
   }
+
+  async createPermissionRoles(dto) {
+    const role = await database.roles.findOne({
+      include: [
+        {
+          model: database.permission,
+          as: 'role_permissions',
+          attributes: ['id', 'nome', 'descricao'],
+        },
+      ]
+    })
+
+    if(!role) {
+      throw new Error('Role não encontrado');
+    }
+
+    const permissions = await database.permission.findAll({
+      where: {
+        id: {
+          [Sequelize.Op.in]: dto.permissions,
+        },
+      },
+    });
+
+    await role.removeRole_permissions(role.role_permissions);
+
+    await role.addRole_permissions(permissions);
+
+    const newRole = await database.roles.findOne({
+      include: [
+        {
+          model: database.permission,
+          as: 'role_permissions',
+          attributes: ['id', 'nome', 'descricao'],
+        },
+      ],
+    });
+
+    return newRole;
+  }
 }
 
 module.exports = SecurityService;
